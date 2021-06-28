@@ -19,9 +19,9 @@ function App() {
 
     useEffect(() => {
         booksApi.getBooks()
-            .then(responce => {
-                console.log(responce)
-                dispatch(setBooks(responce.data))
+            .then(response => {
+                console.log(response)
+                dispatch(setBooks(response.data))
             })
     }, [])
 
