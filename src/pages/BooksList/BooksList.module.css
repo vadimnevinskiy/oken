@@ -1,0 +1,21 @@
+.booksList{
+    padding: 0px 20px;
+}
+
+.booksList .delete{
+    width: 70px;
+    text-align: center;
+}
+.title{
+    margin: 0px;
+    padding: 0px;
+}
+.author{
+    font-weight: bold;
+}
+.photo{
+    width: 100px;
+    height: 300px;
+}
+
+
