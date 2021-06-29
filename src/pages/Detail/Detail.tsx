@@ -1,21 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {NavLink, useHistory} from "react-router-dom";
+import React, {useEffect, useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import classes from './Detail.module.css'
-import {useSelector} from "react-redux";
-import Preloader from "../../common/Preloader/Preloader";
-import FloatingButton from "../../common/FloatingButton/FloatingButton";
+import {useSelector} from 'react-redux'
+import Preloader from '../../common/Preloader/Preloader'
+import FloatingButton from '../../common/FloatingButton/FloatingButton'
+import {AppStateType} from '../../redux/store'
+import {BookType} from '../../types/types'
+
+
+
 
 const Detail = () => {
     const history = useHistory();
-    const [book, setBook] = useState(null)
-    const books = useSelector(({booksPage}) => booksPage.books);
+    const [book, setBook] = useState<BookType | null>(null)
+    const books: BookType[] = useSelector(({booksPage}: AppStateType) => booksPage.books);
 
-    const getDetail = (booksList, bookId) => {
+    const getDetail = (booksList: BookType[], bookId: number) => {
         const result = booksList.filter(item => item.id === bookId)
         setBook(result[0])
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         const bookId = Number(history.location.pathname.split('/')[2])
         getDetail(books, bookId)
     }, [])

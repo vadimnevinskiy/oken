@@ -1,12 +1,30 @@
+import {BookType} from '../types/types'
+
 const SET_BOOKS = 'SET_BOOKS'
 const DELETE_BOOK = 'DELETE_BOOK'
 
-let initialState = {
+
+type InitialStateType = {
+    books: BookType[]
+}
+type BooksActionType = {
+    type: typeof SET_BOOKS
+    books: BookType[]
+}
+type DeleteBookType = {
+    type: typeof DELETE_BOOK
+    bookId: number
+}
+type ActionsType = BooksActionType | DeleteBookType
+
+
+
+let initialState: InitialStateType = {
     books: []
 }
 
 
-const booksReducer = (state = initialState, action) => {
+const booksReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_BOOKS:
             return {
@@ -25,13 +43,14 @@ const booksReducer = (state = initialState, action) => {
 
 
 
-export const setBooks = (books) => {
+
+export const setBooks = (books: BookType[]): BooksActionType => {
     return {
         type: SET_BOOKS,
         books: books
     }
 }
-export const deleteBook = (bookId) => {
+export const deleteBook = (bookId: number): DeleteBookType => {
     return {
         type: DELETE_BOOK,
         bookId: bookId

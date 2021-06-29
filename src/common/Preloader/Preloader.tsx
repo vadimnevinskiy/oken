@@ -1,6 +1,10 @@
-import React from "react";
+import React from 'react'
 
-const Preloader = () => {
+
+type PropsType = {
+
+}
+const Preloader: React.FC<PropsType> = () => {
     return (
         <div className="progress">
             <div className="indeterminate"></div>

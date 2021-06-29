@@ -14,14 +14,18 @@ const BooksList = React.lazy(() => import ("./pages/BooksList/BooksList"));
 const Detail = React.lazy(() => import ("./pages/Detail/Detail"));
 const AddBook = React.lazy(() => import ("./pages/AddBook/AddBook"));
 
-function App() {
+
+type PropsType = {
+
+}
+const App: React.FC<PropsType> = () => {
     const dispatch = useDispatch()
 
 
     //Get all items from server
     useEffect(() => {
         booksApi.getBooks()
-            .then(response => {
+            .then((response: any) => {
                 dispatch(setBooks(response.data))
             })
     }, [])

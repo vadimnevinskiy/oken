@@ -1,19 +1,26 @@
 import React, {useEffect, useState} from 'react'
 import classes from './Paginator.module.css'
 
-const Paginator = ({items, currentPage, portionSize, selectPage}) => {
-    const [pages, setPages] = useState([]); //Array of page numbers
+type PropsType = {
+    itemsLength: number
+    currentPage: number
+    portionSize: number
+    selectPage: (page: number) => void
+}
+
+const Paginator: React.FC<PropsType> = ({itemsLength, currentPage, portionSize, selectPage}) => {
+    const [pages, setPages] = useState<number[]>([]); //Array of page numbers
 
 
     // Set Array of numbers to display pages
     useEffect(() => {
-        const pagesCount = Math.ceil(items.length / portionSize);
-        const pagesArr = [];// Array for pages
+        const pagesCount: number = Math.ceil(itemsLength / portionSize);
+        const pagesArr: number[] = [];// Array for pages
         for (let i = 1; i <= pagesCount; i++) {
             pagesArr.push(i)
         }
         setPages(pagesArr)
-    }, [items]);
+    }, [itemsLength]);
 
 
 

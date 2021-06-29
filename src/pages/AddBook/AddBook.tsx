@@ -1,8 +1,11 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
-import FloatingButton from "../../common/FloatingButton/FloatingButton";
+import React from 'react'
+import FloatingButton from '../../common/FloatingButton/FloatingButton'
 
-const AddBook = () => {
+
+type PropsType = {
+
+}
+const AddBook: React.FC<PropsType> = () => {
     return (
         <div>
             AddBook
