@@ -1,15 +1,12 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import FloatingButton from "../../common/FloatingButton/FloatingButton";
 
 const AddBook = () => {
     return (
         <div>
             AddBook
-            <div className="fixed-action-btn">
-                <NavLink to={'/'} className="btn-floating btn-large blue darken-3">
-                    <i className="large material-icons">arrow_back</i>
-                </NavLink>
-            </div>
+            <FloatingButton pathLink={'/'} icon={'arrow_back'} color={'blue darken-3'} />
         </div>
     )
 }

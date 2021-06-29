@@ -1,7 +1,8 @@
 import './App.css';
 import 'materialize-css'
 
-import {useDispatch, useSelector} from "react-redux";
+
+import {useDispatch} from "react-redux";
 import React, {Suspense, useEffect} from "react";
 import {booksApi} from "./redux/api";
 import {setBooks} from "./redux/books-reducer";
@@ -15,12 +16,12 @@ const AddBook = React.lazy(() => import ("./pages/AddBook/AddBook"));
 
 function App() {
     const dispatch = useDispatch()
-    const books = useSelector(({booksPage}) => booksPage.books);
 
+
+    //Get all items from server
     useEffect(() => {
         booksApi.getBooks()
             .then(response => {
-                console.log(response)
                 dispatch(setBooks(response.data))
             })
     }, [])
@@ -32,7 +33,7 @@ function App() {
             <div className={'header blue darken-3 z-depth-4'}></div>
             <Suspense fallback={<Preloader />}>
                 <div>
-                    <Route path={'/'} exact render={() => <BooksList books={books} />} />
+                    <Route path={'/'} exact render={() => <BooksList />} />
                     <Route path={'/detail/:id'} render={() => <Detail />} />
                     <Route path={'/add'} render={() => <AddBook />} />
                 </div>
