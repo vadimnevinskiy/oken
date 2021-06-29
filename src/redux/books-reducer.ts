@@ -2,6 +2,7 @@ import {BookType} from '../types/types'
 
 const SET_BOOKS = 'SET_BOOKS'
 const DELETE_BOOK = 'DELETE_BOOK'
+const ADD_BOOK = 'ADD_BOOK'
 
 
 type InitialStateType = {
@@ -15,7 +16,11 @@ type DeleteBookType = {
     type: typeof DELETE_BOOK
     bookId: number
 }
-type ActionsType = BooksActionType | DeleteBookType
+type AddBookType = {
+    type: typeof ADD_BOOK
+    book: BookType
+}
+type ActionsType = BooksActionType | DeleteBookType | AddBookType
 
 
 
@@ -35,6 +40,11 @@ const booksReducer = (state: InitialStateType = initialState, action: ActionsTyp
             return {
                 ...state,
                 books: state.books.filter(item => item.id !== action.bookId)
+            }
+        case ADD_BOOK:
+            return {
+                ...state,
+                books: [...state.books, action.book]
             }
         default:
             return state
@@ -56,6 +66,11 @@ export const deleteBook = (bookId: number): DeleteBookType => {
         bookId: bookId
     }
 }
-
+export const addBook = (book: BookType): AddBookType => {
+    return {
+        type: ADD_BOOK,
+        book: book
+    }
+}
 
 export default booksReducer
