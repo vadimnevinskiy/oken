@@ -43,17 +43,17 @@ const AddBook: React.FC<PropsType> = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className={classes.form}>
                                         <div className="input-field">
-                                            <Field id="title" type="text" name="title" component="input"/>
+                                            <Field id="title" type="text" name="title" component="input" />
                                             <label htmlFor="title">Title</label>
                                         </div>
                                         <div className="input-field">
                                             <i className="material-icons prefix">account_circle</i>
-                                            <input id="author" type="text" className="validate" />
+                                            <Field id="author" type="text" name="author" component="input" className="validate" />
                                             <label htmlFor="author">Author</label>
                                         </div>
                                         <div className="input-field">
                                             <i className="material-icons prefix">mode_edit</i>
-                                            <textarea id="description"  name="description" className="materialize-textarea"></textarea>
+                                            <Field id="description" name="description" component="textarea" className="materialize-textarea"/>
                                             <label htmlFor="description">Description</label>
                                         </div>
                                         <div className="input-field">
