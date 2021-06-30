@@ -27,6 +27,7 @@ const Paginator: React.FC<PropsType> = ({itemsLength, currentPage, portionSize, 
     return (
         <div className={classes.paginator}>
             {
+                itemsLength > portionSize &&
                 pages.map(page => {
                     return (
 

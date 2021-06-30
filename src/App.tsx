@@ -1,11 +1,7 @@
 import './App.css';
 import 'materialize-css'
 
-
-import {useDispatch} from "react-redux";
 import React, {Suspense, useEffect} from "react";
-import {booksApi} from "./redux/api";
-import {setBooks} from "./redux/books-reducer";
 import Preloader from "./common/Preloader/Preloader";
 import {Route} from "react-router-dom";
 
@@ -19,22 +15,8 @@ type PropsType = {
 
 }
 const App: React.FC<PropsType> = () => {
-    const dispatch = useDispatch()
-
-
-    //Get all items from server
-    useEffect(() => {
-        booksApi.getBooks()
-            .then((response: any) => {
-                dispatch(setBooks(response.data))
-            })
-    }, [])
-
-
-
     return (
         <>
-            <div className={'header blue darken-3 z-depth-4'}></div>
             <Suspense fallback={<Preloader />}>
                 <div>
                     <Route path={'/'} exact render={() => <BooksList />} />

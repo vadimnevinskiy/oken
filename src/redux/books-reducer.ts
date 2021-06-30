@@ -3,7 +3,7 @@ import {BookType} from '../types/types'
 const SET_BOOKS = 'SET_BOOKS'
 const DELETE_BOOK = 'DELETE_BOOK'
 const ADD_BOOK = 'ADD_BOOK'
-
+const SEARCH_BOOK = 'SEARCH_BOOK'
 
 type InitialStateType = {
     books: BookType[]
@@ -16,11 +16,15 @@ type DeleteBookType = {
     type: typeof DELETE_BOOK
     bookId: number
 }
+type SearchBookType = {
+    type: typeof SEARCH_BOOK
+    searchText: string
+}
 type AddBookType = {
     type: typeof ADD_BOOK
     book: BookType
 }
-type ActionsType = BooksActionType | DeleteBookType | AddBookType
+type ActionsType = BooksActionType | DeleteBookType | SearchBookType | AddBookType
 
 
 
@@ -40,6 +44,17 @@ const booksReducer = (state: InitialStateType = initialState, action: ActionsTyp
             return {
                 ...state,
                 books: state.books.filter(item => item.id !== action.bookId)
+            }
+        case SEARCH_BOOK:
+            const filteredBooks: BookType[] = state.books.filter((item) =>
+                item.description.toLowerCase().includes(action.searchText.toLowerCase())
+                || item.title.toLowerCase().includes(action.searchText.toLowerCase())
+                || item.author.toLowerCase().includes(action.searchText.toLowerCase())
+                || String(item.year).includes(action.searchText.toLowerCase())
+            )
+            return {
+                ...state,
+                books: [...filteredBooks]
             }
         case ADD_BOOK:
             return {
@@ -70,6 +85,12 @@ export const addBook = (book: BookType): AddBookType => {
     return {
         type: ADD_BOOK,
         book: book
+    }
+}
+export const setSearchBook = (searchText: string): SearchBookType => {
+    return {
+        type: SEARCH_BOOK,
+        searchText: searchText
     }
 }
 

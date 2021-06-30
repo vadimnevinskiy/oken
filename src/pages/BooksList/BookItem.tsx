@@ -10,8 +10,8 @@ type PropsType = {
 }
 const BookItem: React.FC<PropsType> = ({book, deleteItem}) => {
     return (
-        <div className="col s12 m6 l4">
-            <h5 className={classes.title}>{book.title} {book.year} г.</h5>
+        <div className="col s12 m12 l6 xl4">
+            <h5 className={classes.title}>{book.title}</h5>
             <div className="card horizontal">
                 <div className="card-image">
                     <img className={classes.photo} src={book.photoUrl}/>
@@ -19,7 +19,8 @@ const BookItem: React.FC<PropsType> = ({book, deleteItem}) => {
                 <div className="card-stacked">
                     <div className="card-content">
                         <div className={classes.author}>{book.author}</div>
-                        <div className="content"
+                        <h5 className={classes.title}>{book.year} г.</h5>
+                        <div className={classes.content}
                              dangerouslySetInnerHTML={{__html: book.description.slice(0, 80)}}></div>
                     </div>
                     <div className="card-action">

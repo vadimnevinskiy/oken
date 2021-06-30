@@ -1,6 +1,7 @@
 .paginator{
     text-align: center;
     padding: 20px 0px;
+    height: 82px;
 }
 .paginator span{
     display: inline-block;
