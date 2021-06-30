@@ -11,40 +11,33 @@ import {booksApi} from "../../redux/api";
 import Search from "../../common/Search/Search";
 
 
-type PropsType = {}
+type PropsType = {
+    getAllBooksFromServer: () => any
+}
 
-const BooksList: React.FC<PropsType> = () => {
+const BooksList: React.FC<PropsType> = ({getAllBooksFromServer}) => {
     const dispatch = useDispatch()
     const portionSize: number = 3 // Number of records displayed
     const books: BookType[] = useSelector(({booksPage}: AppStateType) => booksPage.books) //Get all books from store
     const [currentPage, setCurrentPage] = useState<number>(1); //Current page
     const [cropList, setCropList] = useState<BookType[]>([]) // Crop list of books for display at one page
 
-    // Get all books from the server
-    const getAllBooksFromServer = () => {
-        return booksApi.getBooks()
-            .then((response: any) => {
-                dispatch(setBooks(response.data))
-            })
-    }
 
-
+    //Search book
     const searchBook = async (values: SearchType) => {
-        // Get all books from the server to search for all books
-        await getAllBooksFromServer()
-        dispatch(setSearchBook(values.searchText))
-        setCurrentPage(1)
+        if(values.searchText) {
+            // Get all books from the server to search for all books
+            await getAllBooksFromServer()
+            dispatch(setSearchBook(values.searchText))
+            setCurrentPage(1)
+        }
+    }
+    const resetSearch = (reset: () => void) => {
+        getAllBooksFromServer()
+        reset()
     }
 
 
-    //Get all items from server
-    useEffect( () => {
-        getAllBooksFromServer().then()
-    }, [])
-
-    //Get all items from server
-    useEffect(() => {
-    }, [books])
 
 
     //Trim the books array based on the current page
@@ -59,17 +52,19 @@ const BooksList: React.FC<PropsType> = () => {
         setCurrentPage(currentPage)
     }, [])
 
-    // Delete Book item by ID
+    // Delete Book by ID
     const deleteItem = useCallback(bookId => {
         dispatch(deleteBook(bookId))
     }, [])
 
 
 
-    const resetSearch = (reset: () => void) => {
-        getAllBooksFromServer().then()
-        reset()
-    }
+
+
+
+
+
+
 
     return (
         <>

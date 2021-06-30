@@ -8,29 +8,31 @@ import {addBook} from "../../redux/books-reducer";
 import {useHistory} from "react-router-dom";
 
 
-type PropsType = {}
+type PropsType = {
+    getAllBooksFromServer: () => any
+}
 
-const AddBook: React.FC<PropsType> = () => {
+const AddBook: React.FC<PropsType> = ({getAllBooksFromServer}) => {
     const dispatch = useDispatch()
     const history = useHistory();
 
-    const generateId = () => {
+
+    const generateRandomId = () => {
         return Math.floor(Math.random() * 10) * 10
     }
 
-    const onSubmit = (values: BookType) => {
-        const newBook: BookType = {
-            id: generateId(),
-            title: values.title,
-            author: values.author,
-            description: values.description,
-            photoUrl: values.photoUrl,
-            year: values.year
 
-        }
+    const addNewBook = async (values: BookType) => {
+        const newBook: BookType = {...values, id: generateRandomId()}
+        await getAllBooksFromServer()
         dispatch(addBook(newBook))
         history.push('/')
     }
+
+
+
+
+
 
     return (
             <div className={classes.addBook}>
@@ -38,7 +40,7 @@ const AddBook: React.FC<PropsType> = () => {
                 <div className="card">
                     <div className="card-content">
                         <Form
-                            onSubmit={onSubmit}
+                            onSubmit={addNewBook}
                             render={({handleSubmit}: any) => (
                                 <form onSubmit={handleSubmit}>
                                     <div className={classes.form}>
@@ -77,8 +79,6 @@ const AddBook: React.FC<PropsType> = () => {
                         />
                     </div>
                 </div>
-
-
             <FloatingButton pathLink={'/'} icon={'arrow_back'} color={'blue darken-3'}/>
         </div>
     )

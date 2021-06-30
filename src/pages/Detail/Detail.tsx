@@ -10,27 +10,37 @@ import {BookType} from '../../types/types'
 
 
 
+
 const Detail = () => {
     const history = useHistory();
     const [book, setBook] = useState<BookType | null>(null)
     const books: BookType[] = useSelector(({booksPage}: AppStateType) => booksPage.books);
 
-    const getDetail = (booksList: BookType[], bookId: number) => {
-        const result = booksList.filter(item => item.id === bookId)
-        setBook(result[0])
-    }
 
+    //Get bookId and get detail of book by id
     useEffect(() => {
         const bookId = Number(history.location.pathname.split('/')[2])
         getDetail(books, bookId)
     }, [])
 
+    //Get detail of book by ID
+    const getDetail = (booksList: BookType[], bookId: number) => {
+        const result = booksList.filter(item => item.id === bookId)
+        setBook(result[0])
+    }
+
+
+
+
+
+
+
 
     return (
         <>
             {
-                book ?
-                <div className="row">
+                book
+                ? <div className="row">
                     <div className="col s1 m3">
                         <img className={classes.photo} src={book.photoUrl} alt=""/>
                     </div>
