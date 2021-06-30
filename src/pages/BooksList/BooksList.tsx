@@ -5,10 +5,10 @@ import {deleteBook, setBooks, setSearchBook} from '../../redux/books-reducer'
 import {useDispatch, useSelector} from 'react-redux'
 import FloatingButton from '../../common/FloatingButton/FloatingButton'
 import BookItem from './BookItem'
-import {BookType} from '../../types/types'
+import {BookType, SearchType} from '../../types/types'
 import {AppStateType} from '../../redux/store'
-import {Field, Form} from "react-final-form";
 import {booksApi} from "../../redux/api";
+import Search from "../../common/Search/Search";
 
 
 type PropsType = {}
@@ -20,7 +20,7 @@ const BooksList: React.FC<PropsType> = () => {
     const [currentPage, setCurrentPage] = useState<number>(1); //Current page
     const [cropList, setCropList] = useState<BookType[]>([]) // Crop list of books for display at one page
 
-
+    // Get all books from the server
     const getAllBooksFromServer = () => {
         return booksApi.getBooks()
             .then((response: any) => {
@@ -30,6 +30,7 @@ const BooksList: React.FC<PropsType> = () => {
 
 
     const searchBook = async (values: SearchType) => {
+        // Get all books from the server to search for all books
         await getAllBooksFromServer()
         dispatch(setSearchBook(values.searchText))
         setCurrentPage(1)
@@ -64,10 +65,6 @@ const BooksList: React.FC<PropsType> = () => {
     }, [])
 
 
-    type SearchType = {
-        searchText: string
-    }
-
 
     const resetSearch = (reset: () => void) => {
         getAllBooksFromServer().then()
@@ -76,40 +73,7 @@ const BooksList: React.FC<PropsType> = () => {
 
     return (
         <>
-            <div className={classes.header + ' blue darken-3 z-depth-4'}>
-                <Form
-                    onSubmit={searchBook}
-                    render={({handleSubmit, form, submitting, pristine, values}: any) => (
-                        <form onSubmit={handleSubmit}>
-                            <div className={classes.form}>
-                                <div className="row">
-                                    <div className="col s5 m7 l8 xl9">
-                                        <div className="input-field">
-                                            <Field id="searchText" type="text" name="searchText" component="input"/>
-                                            <label htmlFor="searchText">Search</label>
-                                        </div>
-                                    </div>
-                                    <div className="col s7 m5 l4 xl3">
-                                        <div className={classes.buttonBox + " right"}>
-                                            <button type="submit"
-                                                    className={classes.button + " btn-large waves-effect waves-light"}>
-                                                Search
-                                            </button>
-                                            <button
-                                                className={classes.button + " btn-large waves-effect waves-light"}
-                                                type="button"
-                                                onClick={() => resetSearch(form.reset)}
-                                                disabled={submitting || pristine}
-                                            >Clear
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    )}
-                />
-            </div>
+            <Search resetSearch={resetSearch} searchBook={searchBook} />
             <Paginator
                 itemsLength={books.length}
                 currentPage={currentPage}

@@ -6,4 +6,6 @@ export type BookType = {
     description: string
     photoUrl: string
 }
-
+export type SearchType = {
+    searchText: string
+}
