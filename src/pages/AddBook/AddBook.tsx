@@ -57,10 +57,12 @@ const AddBook: React.FC<PropsType> = () => {
                                             <label htmlFor="description">Description</label>
                                         </div>
                                         <div className="input-field">
+                                            <i className="material-icons prefix">date_range</i>
                                             <Field id="year" type="text" name="year" component="input"/>
                                             <label htmlFor="year">Year</label>
                                         </div>
                                         <div className="input-field">
+                                            <i className="material-icons prefix">image</i>
                                             <Field id="photoUrl" type="text" name="photoUrl" component="input"/>
                                             <label htmlFor="photoUrl">Photo url</label>
                                         </div>
