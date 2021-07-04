@@ -1,23 +1,23 @@
-.booksList{
-    padding: 0px 20px;
+.booksList {
+  padding: 0px 20px;
 }
 
-.booksList .delete{
-    width: 70px;
-    text-align: center;
+.booksList .delete {
+  width: 70px;
+  text-align: center;
 }
-.title{
-    margin: 0px;
-    padding: 0px 0px 10px 0px;
+.title {
+  margin: 0px;
+  padding: 0px 0px 10px 0px;
 }
-.author{
-    font-weight: bold;
+.author {
+  font-weight: bold;
 }
-.photo{
-    width: 100px;
-    height: 300px;
+.photo {
+  width: 100px;
+  height: 300px;
 }
 
-.delete{
-    cursor: pointer;
+.delete {
+  cursor: pointer;
 }
