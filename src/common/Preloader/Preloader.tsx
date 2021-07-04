@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-type PropsType = {};
+type PropsType = {}
 const Preloader: React.FC<PropsType> = () => {
-  return (
-    <div className="progress">
-      <div className="indeterminate"></div>
-    </div>
-  );
-};
+    return (
+        <div className="progress">
+            <div className="indeterminate"></div>
+        </div>
+    )
+}
 
-export default Preloader;
+export default Preloader
